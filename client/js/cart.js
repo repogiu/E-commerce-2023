@@ -87,31 +87,29 @@ const displayCart =() =>{
     modalFooter.className="modal-footer"
     modalFooter.innerHTML=`
     <div class="total-price">Total: $ ${total}</div>
-    <button class="btn-primary" id="checkout-btn">go to checkout</button>
+    <button class="btn-primary" id="checkout-btn">Ir a pagar</button>
     <div id="button-checkout"></div>
 
     `;
 
     modalContainer.append(modalFooter);
 
-    // mp;
+    // mercado pago;
     // Add SDK credentials
-// REPLACE WITH YOUR PUBLIC KEY AVAILABLE IN: https://developers.mercadopago.com/panel
-const mercadopago = new MercadoPago("TEST-41970c90-c65f-4b7e-b021-e644e0852c07", {
-    locale: 'es-AR' // The most common are: 'pt-BR', 'es-AR' and 'en-US'
-  });
+    // REPLACE WITH YOUR PUBLIC KEY AVAILABLE IN: https://developers.mercadopago.com/panel
+    const mercadopago = new MercadoPago("TEST-15e4302f-53c5-4c60-bf9d-6f94ab4bf84e", {
+        locale: 'es-AR' // The most common are: 'pt-BR', 'es-AR' and 'en-US'
+      });
+      
+    const checkoutButton=modalFooter.querySelector("#checkout-btn");
   
-const checkoutButton=modalFooter.querySelector("#checkout-btn");
-
-
-  
-    checkoutButton.addEventListener("click",function(){
+    checkoutButton.addEventListener("click", function () {
 
     checkoutButton.remove();
   
     const orderData = {
       quantity: 1,
-      description: "compra de ecommerce",
+      description: "Monto de tu compra:",
       price: total,
     };
   
@@ -128,37 +126,37 @@ const checkoutButton=modalFooter.querySelector("#checkout-btn");
       .then(function (preference) {
         createCheckoutButton(preference.id);
       })
-  
+      // Manejo de error
       .catch(function () {
         alert("Unexpected error");
       });
     
     });
   
-  
-  function createCheckoutButton(preferenceId) {
-    // Initialize the checkout
-    const bricksBuilder = mercadopago.bricks();
-  
-    const renderComponent = async (bricksBuilder) => {
-      //if (window.checkoutButton) window.checkoutButton.unmount();
-      
-      await bricksBuilder.create(
-        'wallet',
-        'button-checkout', // class/id where the payment button will be displayed
-        {
-          initialization: {
-            preferenceId: preferenceId
-          },
-          callbacks: {
-            onError: (error) => console.error(error),
-            onReady: () => {}
+    function createCheckoutButton(preferenceId) {
+      // Initialize the checkout
+      const bricksBuilder = mercadopago.bricks();
+    
+      const renderComponent = async (bricksBuilder) => {
+        //if (window.checkoutButton) window.checkoutButton.unmount();
+        
+        await bricksBuilder.create(
+          'wallet',
+          'button-checkout', // class/id where the payment button will be displayed
+          {
+            initialization: {
+              preferenceId: preferenceId
+            },
+            // Manejo de error
+            callbacks: {
+              onError: (error) => console.error(error),
+              onReady: () => {}
+            }
           }
-        }
-      );
-    };
-    window.checkoutButton =  renderComponent(bricksBuilder);
-  }
+        );
+      };
+      window.checkoutButton =  renderComponent(bricksBuilder);
+    }
 
 
 }   else {
