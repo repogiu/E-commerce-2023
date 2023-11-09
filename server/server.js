@@ -1,4 +1,5 @@
 const express = require("express");
+const mysql = require('mysql2');
 const app = express();
 const cors = require("cors");
 const mercadopago = require("mercadopago");
@@ -12,12 +13,13 @@ mercadopago.configure({
 
 // Middleware para datos de formulario y JSON
 app.use(express.urlencoded({ extended: false }));
+// Parsear JSON bodies (para POST requests)
 app.use(express.json());
 
 // Sirviendo archivos estáticos del subdirectorio 'media' dentro de 'client'
 
 app.use(express.static(path.join(__dirname, "../client")));
-// Habilitar CORS
+// Middleware para permitir solicitudes de diferentes orígenes
 app.use(cors());
 
 // Ruta específica para 'index.html'
@@ -64,6 +66,37 @@ app.get('/feedback', function (req, res) {
 	});
 });
 
-app.listen(8080, () => {
-	console.log("Server is running on http://localhost:8080");
+
+
+// Configuración de la conexión a la base de datos
+const connection = mysql.createConnection({
+	host     : 'localhost',
+	user     : 'root',
+	password : 'root',
+	database : 'ecommerce'
+  });
+  
+  // Conectar a la base de datos
+  connection.connect(error => {
+	if (error) {
+	  console.error('Error de conexión: ' + error.stack);
+	  return;
+	}
+	console.log('Conectado con el identificador ' + connection.threadId);
+  });
+  
+  
+  // GET endpoint para obtener productos
+  app.get('/api/products', (req, res) => {
+	connection.query('SELECT * FROM products', (error, results, fields) => {
+	  if (error) return res.status(500).send(error);
+  
+	  res.json(results);
+	});
+  });
+  
+  // Iniciar el servidor en un puerto (8080)
+  const PORT = process.env.PORT || 8080;
+  app.listen(PORT, () => {
+	console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
