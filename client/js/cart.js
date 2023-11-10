@@ -1,9 +1,9 @@
-const modalContainer=document.getElementById("modal-container");
-const modalOverlay= document.getElementById("modal-overlay");
+// Capturamos los id del html
+const modalContainer=document.getElementById("modal-container"); // id modal carrito
+const modalOverlay= document.getElementById("modal-overlay"); // id fondo carrito
 
-const cartBtn= document.getElementById("cart-btn"); // captura el id del boton
-const cartCounter= document.getElementById("cart-counter");
-
+const cartBtn= document.getElementById("cart-btn"); //  id del boton
+const cartCounter= document.getElementById("cart-counter"); // id contador de productos
 
 
 const displayCart =() =>{
@@ -11,7 +11,7 @@ const displayCart =() =>{
     modalContainer.style.display="block";
     modalOverlay.style.display="block";
 
-    //modal header
+    //Cabecera del modal
     const modalHeader=document.createElement("div");
 
     const modalClose = document.createElement("div");
@@ -32,7 +32,7 @@ const displayCart =() =>{
 
     modalContainer.append(modalHeader);
 
-    // modal body
+    // Cuerpo del modal
     if (cart.length >0){
     cart.forEach((product) =>{
     const modalBody= document.createElement("div");
@@ -49,7 +49,7 @@ const displayCart =() =>{
             <span class="quantity-btn-increse">+</span>
       </div>
             <div class="price">${product.price * product.quanty}$</div>
-            <div class="delete-product">Eliminar</div>
+            <div class="delete-product">Quitar</div>
     </div>
     `;
     modalContainer.append(modalBody);

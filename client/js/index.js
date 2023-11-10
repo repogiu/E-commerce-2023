@@ -1,3 +1,5 @@
+
+// Inicalizacion
 const shopContent = document.getElementById("shopContent");
 const cart = [];
 
@@ -17,6 +19,7 @@ function loadAndDisplayProducts() {
         `;
         shopContent.append(content);
 
+        // Boton Agregar al carrito
         const buyButton = document.createElement("button");
         buyButton.innerText = "Agregar al carrito";
         content.append(buyButton);
