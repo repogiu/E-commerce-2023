@@ -21,16 +21,17 @@
     outline: 0;
     padding: 10px;
     color: white;
-    background-color: #1bcb7f;
+    background-color: black;
     text-align: center;
     cursor: pointer;
     width:100%;
     font-size: 15px;
+    border-radius: 25px; 
 }
 .cart-btn{
     position: fixed;
-    top:90vh;
-    right:40px;
+    top: 40px; /* Cambia 90vh a un valor fijo en píxeles para ubicarlo en la parte superior */
+    right:40px;/* Ajusta la distancia desde el borde derecho de la pantalla */
     background-color: rgb(25,25,25);
     padding: 10px;
     border-radius: 50%;
@@ -45,7 +46,7 @@
 .cart-counter{
     display:none;
     position:fixed;
-    top:89vh;
+    top:35px;
     right:27px;
     color: #fff;
     text-align: center;
@@ -83,8 +84,8 @@
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
-    max-width:500px;
-    width: 100%;
+    max-width: 700px;
+    width: 120%;
     z-index:1;
     max-height: 88vh;
     overflow-y: auto;
@@ -95,6 +96,15 @@
 .modal-close{
     float:right;
     cursor:pointer;
+    color: black; /* Color del texto del botón */
+    font-weight: bold; /* Hacer la "X" más gruesa */
+    border-radius: 8%; 
+
+}
+
+.modal-close:hover {
+    cursor:pointer;
+    opacity: 0.5;
 }
 .modal-title{
     font-size:24px;
@@ -163,11 +173,18 @@
     font-weight: bold;
     margin-top: 20px;
 }
-.delete-produc{
-    margin-top:20px;
-    margin-left:2em;
-    cursor:pointer;
+.delete-product{
+    margin-top: 0; /* Ajusta este valor según sea necesario */
+    cursor: pointer; /* Cambiar el cursor al pasar el mouse */
+    color: black; /* Color del texto del botón */
+    font-size: 12px; /* Tamaño del texto dentro del botón */
 }
+
+/* Puedes agregar :hover para cambiar la apariencia cuando el ratón pasa por encima del botón */
+.delete-product:hover {
+    color: red; /* Color del texto del botón */
+  }
+
 .modal-footer{
     text-align:center;
 }
@@ -197,4 +214,9 @@
 }
 #button-checkout{
     z-index:10;
+}
+.head {
+    background-color: #D2B48C; /* Color de fondo */
+    width: 100%;
+    height: 100%;
 }

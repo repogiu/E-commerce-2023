@@ -16,7 +16,7 @@ const displayCart =() =>{
 
     const modalClose = document.createElement("div");
 
-    modalClose.innerText="❌";
+    modalClose.innerText="X";
     modalClose.className= "modal-close";
     modalHeader.append(modalClose)
 
@@ -26,7 +26,7 @@ const displayCart =() =>{
     });
 
     const modalTitle= document.createElement("div");
-    modalTitle.innerText="Cart";
+    modalTitle.innerText="CARRITO DE COMPRAS";
     modalTitle.className="modal-title";
     modalHeader.append(modalTitle);
 
@@ -49,7 +49,7 @@ const displayCart =() =>{
             <span class="quantity-btn-increse">+</span>
       </div>
             <div class="price">${product.price * product.quanty}$</div>
-            <div class="delete-product">❌</div>
+            <div class="delete-product">Eliminar</div>
     </div>
     `;
     modalContainer.append(modalBody);
@@ -162,7 +162,7 @@ const displayCart =() =>{
 }   else {
     const modalText=document.createElement("h2");
     modalText.className="modal-body";
-    modalText.innerText="Tu carrito está vacio";
+    modalText.innerText="El carrito está vacio";
     modalContainer.append(modalText);
    }
 

@@ -18,7 +18,7 @@ function loadAndDisplayProducts() {
         shopContent.append(content);
 
         const buyButton = document.createElement("button");
-        buyButton.innerText = "Añadir al carrito";
+        buyButton.innerText = "Agregar al carrito";
         content.append(buyButton);
 
         buyButton.addEventListener("click", () => {
